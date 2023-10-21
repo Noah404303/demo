@@ -1,5 +1,5 @@
 def backen(sorte):
-    print("kuche backen: {}".format(sorte))
+    print("kuchen backen: {}".format(sorte))
 
 
 for n in range(1, 10):
@@ -12,7 +12,7 @@ print ("runde 2")
 for n in range(1, 3):
     input("daniel> ")
     
-backen("schocko kuchen")
+backen("schoko kuchen")
 print("ende")
 print("byby")
 input("belibige taste")

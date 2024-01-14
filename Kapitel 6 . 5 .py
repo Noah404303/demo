@@ -7,5 +7,5 @@ for n in range(0, 10):
     zeit = time.asctime(time.localtime())
     print("[%s] %s> " % ( zeit, user), end="")
     nachricht = sys.stdin.readline()
-    print("debug: sendenachricht %s" % nachricht)
+    print("debug: nachricht: %s" % nachricht)
           

@@ -31,7 +31,7 @@ def Verschlüsseln(Klartext):
     return umdrehen(Klartext)
 
 def Entschlüsseln(Geheimtext):
-    return Geheimtext[::-1]
+    return umdrehen(Geheimtext)
 
 nachricht = Verschlüsseln("das ist geheim")
 print("nachricht:%s" % nachricht)

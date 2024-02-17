@@ -53,6 +53,20 @@ def rotieren(original_asciiwert, asciiwert):
     # ansonsten: wir müssen rotieren 
     return asciiwert - 26 
 
+def rotieren_rückwärts(original_asciiwert, asciiwert):
+    # kleiner buchstabe
+    if ist_kleiner_buchstabe(original_asciiwert):
+        # Größer gleich a kein rotiren notwendig 
+        if asciiwert >= 97:
+            return asciiwert
+    # Großer buchstabe 
+    else:
+        # Größer gleich A kein rotiren notwendig 
+        if asciiwert >= 65:
+            return asciiwert
+
+    # ansonsten: wir müssen rotieren 
+    return asciiwert + 26 
 
 
 # dise funktion nimt eine asciizahl und überpruft ob es sich um ein buchstabe von alphabet handelt 
@@ -80,12 +94,18 @@ def verschieben(zeichen, vorwärts, schlüssel):
         return zeichen
 
     # hier findet die eigentliche verschibung stad und das passirt durch + rechnung mit asciizahl und schlüssel zahl
-    neuer_asciiwert = asciiwert + schlüssel
-    # rotiren falls notwenig
-    neuer_asciiwert = rotieren(asciiwert, neuer_asciiwert)
+    if vorwärts:
+        neuer_asciiwert = asciiwert + schlüssel
+        # rotiren falls notwenig
+        neuer_asciiwert = rotieren(asciiwert, neuer_asciiwert)
+    else:
+        neuer_asciiwert = asciiwert - schlüssel
+        # rotiren_rückwerts falls notwenig
+        neuer_asciiwert = rotieren_rückwärts(asciiwert, neuer_asciiwert)
+    
     # disse funktion wandelt die neue zahl in ein buchstabe um 
     neuer_buchstabe = chr(neuer_asciiwert)
-    print("b: %s -> %s [%s -> %s]" % (zeichen, neuer_buchstabe, asciiwert, neuer_asciiwert))
+    # print("b: %s -> %s [%s -> %s]" % (zeichen, neuer_buchstabe, asciiwert, neuer_asciiwert))
     return neuer_buchstabe
     
     
@@ -95,12 +115,19 @@ def verschlüsseln(klartext, schlüssel):
     for buchstabe in klartext:
         neuer_buchstabe = verschieben(buchstabe, True, schlüssel)
         geheimtext = geheimtext + neuer_buchstabe
-        print("T: %s" % geheimtext)
-        print()
+        # print("T: %s" % geheimtext)
+        # print()
     return geheimtext
 
 def entschlüsseln(geheimtext, schlüssel):
-    return geheimtext
+    klartext = ""
+    for buchstabe in geheimtext:
+        neuer_buchstabe = verschieben(buchstabe, False, schlüssel)
+        klartext = klartext + neuer_buchstabe
+        # print("T: %s" % klartext)
+        # print()
+
+    return klartext 
 
 def main():
     print("bitte schlüssel eingeben (als zahl): ", end="")
@@ -110,8 +137,13 @@ def main():
     print("bitte nachricht eingeben: ", end="")
     eingabe = sys.stdin.readline()
     eingabe = eingabe.strip()
-    nachricht = verschlüsseln(eingabe, schlüssel)
-    print("nachricht: %s" % nachricht)
+    verschlüsselte_nachricht = verschlüsseln(eingabe, schlüssel)
+    print("verschlüsselte nachricht: %s" % verschlüsselte_nachricht)
+
+
+
+    entschlüsselte_nachricht = entschlüsseln(verschlüsselte_nachricht, schlüssel)
+    print("entschlüsselte nachricht: %s" % entschlüsselte_nachricht)
 
 
 main()

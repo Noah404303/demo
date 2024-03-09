@@ -129,11 +129,15 @@ def entschlüsseln(geheimtext, schlüssel):
 
     return klartext 
 
-def main():
+def caeser_setup():
     print("bitte schlüssel eingeben (als zahl): ", end="")
     schlüssel = sys.stdin.readline()
     schlüssel = schlüssel.strip()
     schlüssel = int(schlüssel)
+    return schlüssel
+
+def main():
+    schlüssel = caeser_setup()
     print("bitte nachricht eingeben: ", end="")
     eingabe = sys.stdin.readline()
     eingabe = eingabe.strip()
@@ -146,5 +150,5 @@ def main():
     print("entschlüsselte nachricht: %s" % entschlüsselte_nachricht)
 
 
-main()
+# main()
     

@@ -3,6 +3,8 @@ import socket
 
 from caesar import *
 
+from chat import * 
+
 import threading
 
 def client_verbindung(client_socket, schlüssel):
@@ -20,8 +22,11 @@ def client_verbindung(client_socket, schlüssel):
 
         # wandle netzwerk nachricht in lesbaren text um 
         nachricht = buffer.decode("utf-8")
+        # print(nachricht)
         klartext = entschlüsseln(nachricht, schlüssel)
-        print(klartext)
+        # print(klartext)
+        nachricht = nachricht_lesen(klartext)
+        print("[%s]<%s> %s" % (nachricht["zeit"], nachricht["user"], nachricht["text"]))
 
 def main():
     print("server start")

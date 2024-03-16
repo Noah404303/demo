@@ -1,6 +1,6 @@
 
 import socket
-
+from chat import * 
 from caesar import *
 
 
@@ -10,6 +10,7 @@ from caesar import *
 
 def main():
     print("client start")
+    user = benutzer_name_abfragen()
     schlüssel = caeser_setup()
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # client_socket.connect(("192.168.178.63", 8888))
@@ -19,7 +20,8 @@ def main():
     
 
     while True:
-        nachricht = input("nachricht: ")
+        text = input("nachricht: ")
+        nachricht = nachricht_erstellen(user,text) 
         geheimtext = verschlüsseln(nachricht, schlüssel)
         client_socket.sendall(geheimtext.encode("utf-8"))
         
